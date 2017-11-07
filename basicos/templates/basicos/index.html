@@ -1,0 +1,17 @@
+{% extends "base/main.html" %}
+
+
+{% block container %}
+    <div class="row">
+        <div class="col col-sm-12 col-md-12 col-lg-12">
+            <h2>Sistema conteos</h2>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="col col-sm-12 col-md-12 col-lg-12">
+            <a href="{% url 'conteo_ciclico:dashboard' %}" class="btn btn-primary">Ingresar</a>
+        </div>
+    </div>
+{% endblock container %}
+    

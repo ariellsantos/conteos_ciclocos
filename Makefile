@@ -1,5 +1,5 @@
 start:
-	python manage.py runserver
+	python manage.py runserver 8001
 
 makemigrations:
 	python manage.py makemigrations

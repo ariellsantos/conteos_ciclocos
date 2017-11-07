@@ -1,0 +1,46 @@
+{% extends "base/main.html" %}
+
+
+{% block container %}
+    <div class="row">
+        <div class="col col-sm-12 col-md-12 col-lg-12">
+            <h4>Lista de conteos {{estatus}}</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Pieza</th>
+                        <th>Cantidad contada</th>
+                        <th>Cantidad en SAP</th>
+                        <th>Fecha apertura</th>
+                        <th>Prioridad</th>
+                        
+                        {% if request.user.perfil.puesto.nombre == "Encargado almacen" %}
+                            <th>Contador</th>
+                        {% endif %}
+                            
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    {% for conteo in conteos  %}
+                        <tr>
+                            <td>{{conteo.pieza}}</td>
+                            <td>{{conteo.cantidad_fisico}}</td>
+                            <td>{{conteo.cantidad_sap}}</td>
+                            <td>{{conteo.fecha_creacion}}</td>
+                            <td>{{conteo.get_prioridad_display}}</td>
+                            {% if request.user.perfil.puesto.nombre == "Encargado almacen" %}
+                                <td>{{conteo.contador.perfil.numero_empleado}}</td>
+                            {% endif %}
+                            
+                            <td><a href="{% url 'conteo_ciclico:cantidad_conteos' conteo.id %}" class="btn btn-warning">Ver conteos</a></td>
+
+                        </tr>
+                    {% endfor %}                        
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock container %}
+    
