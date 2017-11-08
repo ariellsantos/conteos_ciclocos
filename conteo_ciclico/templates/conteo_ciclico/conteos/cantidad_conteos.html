@@ -4,7 +4,27 @@
 {% block container %}
     <div class="row">
         <div class="col col-sm-12 col-md-12 col-lg-12">
-            <h1>Hola</h1>
+            <p><h4>Conteos hechos de la pieza <span style="font-weight: bold;">{{conteo.pieza}}</span> por el contador <span style="font-weight: bold;">{{conteo.contador.first_name}}</span></h4></p>
+
+            <p><h3>Conteos</h3></p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Cantidad</th>
+                        <th>Ubicaion</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cantidad in cantidades %}
+                        <tr>
+                            <td>{{cantidad.cantidad}}</td>
+                            <td>{{cantidad.ubicacion}}</td>
+                            <td>{{cantidad.fecha}}</td>
+                        </tr>
+                    {% endfor %}     
+                </tbody>
+            </table>
         </div>
     </div>
 {% endblock container %}

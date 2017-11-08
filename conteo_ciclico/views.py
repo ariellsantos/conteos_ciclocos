@@ -35,4 +35,16 @@ def conteos(request, estatus=None):
 
 
 def cantidad_conteos(request, pk):
-    return render(request, 'conteo_ciclico/conteos/cantidad_conteos.html')
+    conteo = Conteo.objects.get(pk=pk)
+    cantidades_conteo = CantidadConteo.objects.filter(conteo=conteo)
+    
+    context = {
+        'conteo': conteo,
+        'cantidades': cantidades_conteo,
+    }
+
+    return render(request, 'conteo_ciclico/conteos/cantidad_conteos.html', context)
+
+
+def add_conteos(request, pk):
+    pass

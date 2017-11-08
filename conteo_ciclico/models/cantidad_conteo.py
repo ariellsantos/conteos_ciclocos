@@ -12,7 +12,7 @@ class CantidadConteo(models.Model):
     
 
     def __str__(self):
-        pass
+        return "Conteo: {} Cantidad: {}".format(self.conteo, self.cantidad)
 
     class Meta:
         verbose_name = 'CantidadConteo'

@@ -33,8 +33,14 @@
                             {% if request.user.perfil.puesto.nombre == "Encargado almacen" %}
                                 <td>{{conteo.contador.perfil.numero_empleado}}</td>
                             {% endif %}
+
                             
-                            <td><a href="{% url 'conteo_ciclico:cantidad_conteos' conteo.id %}" class="btn btn-warning">Ver conteos</a></td>
+                            <td>
+                                {% if conteo.contador == request.user %}
+                                    <a href="" class="btn btn-success">Añadir conteo</a> 
+                                {% endif %}        
+                                 <a href="{% url 'conteo_ciclico:cantidad_conteos' conteo.id %}" class="btn btn-warning">Ver conteos</a>
+                            </td>
 
                         </tr>
                     {% endfor %}                        
