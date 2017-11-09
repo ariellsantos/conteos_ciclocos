@@ -14,17 +14,14 @@
                         {% for pieza in piezas  %}
                             <option value="{{pieza.id}}">{{pieza.nombre}}</option>
                         {% endfor %}
-                            
                     </select>
                 </div>
                 <div class="form-group">
                     <select name="contador" id="" class="form-control" required>
                         <option value="" selected="selected" disabled selecte>Elige un contador</option>
-                        
                         {% for contador in contadores %}
                             <option value="{{contador.id}}">{{contador.first_name}}</option>
-                        {% endfor %}
-                            
+                        {% endfor %} 
                     </select>
                 </div>
                 <div class="form-group">

@@ -4,7 +4,6 @@
 {% block container %}
     <div class="row">
         <div class="col col-sm-12 col-md-5 col-lg-5">              
-                
             <h4>Registra un usuario</h4>
             <form action="{% url 'usuarios:crear_usuario' %}" method="POST">
                 {% csrf_token %}

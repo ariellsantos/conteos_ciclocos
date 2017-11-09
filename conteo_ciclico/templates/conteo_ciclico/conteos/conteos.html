@@ -1,6 +1,4 @@
 {% extends "base/main.html" %}
-
-
 {% block container %}
     <div class="row">
         <div class="col col-sm-12 col-md-12 col-lg-12">
@@ -13,11 +11,9 @@
                         <th>Cantidad en SAP</th>
                         <th>Fecha apertura</th>
                         <th>Prioridad</th>
-                        
                         {% if request.user.perfil.puesto.nombre == "Encargado almacen" %}
                             <th>Contador</th>
                         {% endif %}
-                            
                         <th></th>
                         {% if conteo.contador == request.user %}
                             <th></th>
@@ -25,7 +21,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
                     {% for conteo in conteos  %}
                         <tr>
                             <td>{{conteo.pieza}}</td>
@@ -36,8 +31,6 @@
                             {% if request.user.perfil.puesto.nombre == "Encargado almacen" %}
                                 <td>{{conteo.contador.perfil.numero_empleado}}</td>
                             {% endif %}
-
-                            
                             <td>
                                 {% if conteo.contador == request.user and conteo.estatus == "abierto" %}
                                     <a href="{% url 'conteo_ciclico:anadir_cantidad_conteos' conteo.id %}" class="btn btn-success">Añadir conteo</a> 
@@ -48,9 +41,7 @@
                                 <td> 
                                     <a href="{% url 'conteo_ciclico:cerrar_conteo' conteo.id %}" class="btn btn-danger">Cerrar cuenta</a> 
                                 </td>
-                            {% endif %} 
-
-
+                            {% endif %}
                         </tr>
                     {% endfor %}                        
                 </tbody>

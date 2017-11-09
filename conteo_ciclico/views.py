@@ -56,12 +56,10 @@ def cantidad_conteos(request, pk):
 def add_conteos(request, pk):
     conteo = Conteo.objects.get(pk=pk)
     ubicaciones = Ubicacion.objects.all()
-
     context = {
         'conteo': conteo,
         'ubicaciones': ubicaciones,
     }
-
     if request.method == "GET":
         return render(request, 'conteo_ciclico/conteos/anadir_conteos.html', context)
     elif request.method == "POST":
@@ -73,9 +71,7 @@ def add_conteos(request, pk):
         cantidad_conteo.cantidad = cantidad
         cantidad_conteo.conteo = conteo
         cantidad_conteo.ubicacion = ubicacion
-
         cantidad_conteo.save()
-
         conteo.cantidad_fisico = conteo.cantidad_fisico + cantidad
         conteo.save()
 
