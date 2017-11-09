@@ -19,6 +19,9 @@
                         {% endif %}
                             
                         <th></th>
+                        {% if conteo.contador == request.user %}
+                            <th></th>
+                        {% endif %}                        
                     </tr>
                 </thead>
                 <tbody>
@@ -36,11 +39,17 @@
 
                             
                             <td>
-                                {% if conteo.contador == request.user %}
-                                    <a href="" class="btn btn-success">Añadir conteo</a> 
+                                {% if conteo.contador == request.user and conteo.estatus == "abierto" %}
+                                    <a href="{% url 'conteo_ciclico:anadir_cantidad_conteos' conteo.id %}" class="btn btn-success">Añadir conteo</a> 
                                 {% endif %}        
                                  <a href="{% url 'conteo_ciclico:cantidad_conteos' conteo.id %}" class="btn btn-warning">Ver conteos</a>
                             </td>
+                            {% if conteo.contador == request.user and conteo.estatus == "abierto" %}
+                                <td> 
+                                    <a href="{% url 'conteo_ciclico:cerrar_conteo' conteo.id %}" class="btn btn-danger">Cerrar cuenta</a> 
+                                </td>
+                            {% endif %} 
+
 
                         </tr>
                     {% endfor %}                        

@@ -5,6 +5,7 @@
     <div class="row">
         <div class="col col-sm-12 col-md-4 col-lg-4">
             <form action="{% url 'usuarios:login' %}" method="POST">
+                <h4>Iniciar sesión</h4>
                 {% csrf_token %}
                 <div class="form-group">
                     <input type="text" name="username" class="form-control" placeholder="Nombre de usuario">            

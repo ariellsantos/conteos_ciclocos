@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render, HttpResponse, redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
@@ -9,6 +10,7 @@ from .models import Perfil
 from django.contrib.auth.models import User
 from .models import Puesto
 from decimal import Decimal
+
 
 def login_user(request):
     if request.user.is_authenticated():
@@ -34,6 +36,7 @@ def logout_user(request):
     logout(request)
     return redirect('/')
 
+@login_required
 def guardar_usuario(request):
     if request.method == "POST":
         try:

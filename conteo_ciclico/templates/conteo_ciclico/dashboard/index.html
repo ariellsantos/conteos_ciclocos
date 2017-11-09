@@ -6,7 +6,11 @@
         <div class="col col-sm-12 col-md-12 col-lg-12">
             <h3>Conteos</h3>
             <a href="{% url 'conteo_ciclico:conteos' 'abiertos' %}" class="btn btn-primary">Conteos abiertos</a>
-            <a href="" class="btn btn-warning">Historial conteos</a>
+            <a href="{% url 'conteo_ciclico:conteos' 'cerrados' %}" class="btn btn-warning">Historial conteos cerrados</a>
+            
+            {% if request.user.perfil.puesto.nombre == "Encargado almacen" %}
+                <a href="{% url 'conteo_ciclico:crear_conteo'%}" class="btn btn-success">Crear nuevo conteo</a>        
+            {% endif %}                
         </div>
     </div>
 {% endblock container %}

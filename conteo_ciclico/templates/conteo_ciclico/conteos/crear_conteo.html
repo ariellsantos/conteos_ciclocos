@@ -1,0 +1,39 @@
+{% extends "base/main.html" %}
+
+
+{% block container %}
+    <div class="row">
+        <div class="col col-sm-12 col-md5 col-lg-5">
+            <h4>Crear un nuevo conteo</h4>
+
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <select name="pieza" id="" class="form-control" required>
+                        <option value="" selected="selected" disabled selecte>Elige una pieza</option>
+                        {% for pieza in piezas  %}
+                            <option value="{{pieza.id}}">{{pieza.nombre}}</option>
+                        {% endfor %}
+                            
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select name="contador" id="" class="form-control" required>
+                        <option value="" selected="selected" disabled selecte>Elige un contador</option>
+                        
+                        {% for contador in contadores %}
+                            <option value="{{contador.id}}">{{contador.first_name}}</option>
+                        {% endfor %}
+                            
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="number" name="cantidad_sap" id="" class="form-control" min="0" placeholder="Cantidad en el SAP" required>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Guardar" class="btn btn-success">
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock container %}
