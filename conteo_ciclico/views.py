@@ -1,11 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render, redirect
+import csv
+from threading import Thread
+import requests
+from .hilos import ThreadCSV
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Conteo, CantidadConteo, Ubicacion, Pieza
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.conf import settings
 
 @login_required
 def index(request):
@@ -74,7 +79,7 @@ def add_conteos(request, pk):
         cantidad_conteo.save()
         conteo.cantidad_fisico = conteo.cantidad_fisico + cantidad
         conteo.save()
-
+        
         messages.success(request, 'Se agrego correctamente')
         return redirect("conteo_ciclico:conteos", "abiertos")
 
@@ -109,8 +114,25 @@ def crear_conteo(request):
         conteo.contador = contador
         conteo.cantidad_sap = cantidad_sap
         conteo.save()
-
+        message = "Se ha agregado un nuevo conteo de la pieza <span style='color:red;'>{}</span> , en el SAP hay {}".format(conteo.pieza, conteo.cantidad_sap)
+        hilo = Thread(target=_send_email, args=(contador.email, message))
+        hilo.start()
         messages.success(request, 'Se  correctamente creo correctamente el conteo')
         return redirect("conteo_ciclico:conteos", "abiertos")
 
+
+def _send_email(email, message):
+    print settings.MAILGUN_KEY
+    email_sent = requests.post(
+        "https://api.mailgun.net/v3/correo.com/messages",
+        auth=("api", settings.MAILGUN_KEY),
+        data={"from": "Lennox Inc. <hola@corroeo.com>",
+              "to": [email],
+              "subject": "Mensaje del trabajo",
+              "html": message,
+              "o:tracking:": True})
+    
+    print email_sent.status_code
+    print "Hola"
+    return email_sent
 
